@@ -3,6 +3,7 @@ import classes from './Game.module.css';
 
 function Game() {
   const [gameStatus, setGameStatus] = useState([0, 0]);
+  const [turnStatus, setTurnStatus] = useState(0);
   const [gameLayout, setGameLayout] = useState(['', '', '', '', '', '', '', '', '']);
   const winOptions = [
     [0, 1, 2],
@@ -15,27 +16,28 @@ function Game() {
     [2, 4, 6],
   ];
   function checkWin() {
-    // eslint-disable-next-line no-restricted-syntax,guard-for-in
     for (let i = 0; i < winOptions.length; i += 1) {
       const [a, b, c] = winOptions[i];
       if (gameLayout[a] === 'X' && gameLayout[a] === gameLayout[b] && gameLayout[b] === gameLayout[c]) {
         setGameStatus([1, 1]);
-        return;
+        return true;
       }
       if (gameLayout[a] === 'O' && gameLayout[a] === gameLayout[b] && gameLayout[b] === gameLayout[c]) {
         setGameStatus([1, 2]);
-        return;
+        return true;
       }
     }
+    return false;
   }
-  function botTurn(index) {
+  function botTurn() {
     for (let i = 0; i < 9; i += 1) {
-      if (gameLayout[i] === '' && i !== index) {
+      if (gameLayout[i] === '') {
         setGameLayout(() => {
           const newArray = gameLayout;
           newArray[i] = 'O';
           return [...newArray];
         });
+        setTurnStatus(0);
         return;
       }
     }
@@ -47,15 +49,16 @@ function Game() {
       newArray[index] = 'X';
       return [...newArray];
     });
-    botTurn(index);
+    setTurnStatus(1);
   }
   function setNewGame() {
     setGameStatus([0, 0]);
     setGameLayout(['', '', '', '', '', '', '', '', '']);
   }
   useEffect(() => {
-    checkWin();
-  }, [gameLayout]);
+    if (checkWin()) return;
+    if (turnStatus === 1) botTurn();
+  }, [gameLayout, turnStatus]);
   return (
     <>
       <div className={classes.layout}>
