@@ -3,15 +3,10 @@
   height: 600px;
   background-color: aquamarine;
   display: flex;
-  flex-direction: column;
-}
-.layout > div {
-  width: 600px;
-  height: 200px;
-  display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 }
-.layout > div > span {
+.layout > span {
   display: block;
   width: 200px;
   height: 200px;

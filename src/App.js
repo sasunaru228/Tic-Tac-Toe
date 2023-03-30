@@ -1,24 +1,25 @@
-import Authorization from "./Authorization/Authorization";
-import {Routes, Route, useNavigate} from "react-router-dom";
-import {MainPage} from "./MainPage/MainPage";
-import {useEffect} from "react";
+import { Routes, Route, useNavigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import Authorization from './Authorization/Authorization';
+import MainPage from './MainPage/MainPage';
 
 function App() {
-
-    let navigate = useNavigate();
-    useEffect(() => {
-       localStorage.getItem('name') !== null
-           ? navigate('/main')
-           : navigate('/')
-    }, [navigate])
-
+  const navigate = useNavigate();
+  const nameUser = localStorage.getItem('name');
+  const route = nameUser ? '/main' : '/';
+  useEffect(() => {
+    navigate(route);
+    // if (localStorage.getItem('name')) {
+    //   navigate('/main');
+    // } else {
+    //   navigate('/');
+    // }
+  }, []);
   return (
-    <>
-      <Routes>
-          <Route path="/" element={<Authorization/>} />
-          <Route path="/main" element={<MainPage/>}/>
-      </Routes>
-    </>
+    <Routes>
+      <Route path="/" element={<Authorization />} />
+      <Route path="/main" element={<MainPage />} />
+    </Routes>
   );
 }
 
