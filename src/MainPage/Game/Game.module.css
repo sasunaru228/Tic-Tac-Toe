@@ -1,17 +1,80 @@
-.layout {
-  width: 600px;
-  height: 600px;
-  background-color: aquamarine;
+.substrate {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 75px);
 }
-.layout > span {
-  display: block;
-  width: 200px;
-  height: 200px;
-  border: 5px solid black;
-  box-sizing: border-box;
+
+.gameBackground {
+  background-color: #2d3e4f;
+  border-radius: 20px;
+  height: auto;
+  width: 400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.gameBackground > span:nth-child(1) {
+  height: 70px;
+  width: 100%;
+  color: white;
+  font-family: "Play", sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.gameBackground .restart {
+  height: 70px;
+  width: 100%;
+  color: white;
+  font-family: "Play", sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  background-color: transparent;
+  transition: background-color 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.gameBackground .restart:hover {
+  background-color: #599ecc;
+}
+.gameBackground .restartActive {
+  height: 70px;
+  width: 100%;
+  color: white;
+  background-color: #599ecc;
+  font-family: "Play", sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  transition: background-color 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: strike 1s;
+}
+.gameBackground .restartActive:hover {
+  background-color: #3b8bc1;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 9px;
 }
 
 /*# sourceMappingURL=Game.module.css.map */

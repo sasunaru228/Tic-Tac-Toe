@@ -1,31 +1,43 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import classes from './Authorization.module.css';
+import React, { useState } from 'react'
+import classes from './Authorization.module.css'
 
-function Authorization() {
-  const [login, setLogin] = useState('');
-  const userName = localStorage.getItem('name');
-  function enterLogin() {
-    if (login.trim() !== '') {
-      localStorage.setItem('name', login);
-      setLogin('');
-    } else alert('слишком короткий никнейм');
+function Authorization () {
+  const [login, setLogin] = useState('')
+  const [submitting, setSubmitting] = useState(true)
+
+  function enterLogin () {
+    localStorage.setItem('name', login)
+  }
+
+  function checkLogin (loginEnter) {
+    setLogin(loginEnter.trim())
+    if (loginEnter.trim() === '') {
+      setSubmitting(true)
+      return
+    }
+    setSubmitting(false)
   }
 
   return (
     <div className={classes.main}>
       <span className={classes.logo}>MiniGame</span>
-      <input
-        className={classes.inputLogo}
-        type="text"
-        value={login}
-        onChange={(event) => setLogin(event.target.value)}
-      />
-      <Link className={classes.enter} onClick={() => enterLogin()} to={login.trim() !== '' ? '/main' : '/'}>ENTER</Link>
-
-      {userName ? <h1>{userName}</h1> : null}
+      <form onSubmit={() => enterLogin()}>
+        <input
+          className={classes.inputLogo}
+          type="text"
+          value={login}
+          onChange={(e) => checkLogin(e.target.value)}
+        />
+        <button
+          className={classes.confirm}
+          disabled={submitting}
+          type="submit"
+          onSubmit={() => enterLogin()}
+          to={login.trim() !== '' ? '/main' : '/'}>ENTER
+        </button>
+      </form>
     </div>
-  );
+  )
 }
 
-export default Authorization;
+export default Authorization

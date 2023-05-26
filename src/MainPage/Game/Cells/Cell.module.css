@@ -1,0 +1,44 @@
+.cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 120px;
+  background-color: #34485d;
+  transition: background-color 0.15s;
+  position: relative;
+}
+.cell:hover::after {
+  opacity: 0.4;
+  visibility: visible;
+  transform: translate(-50%, -50%) scale(0.7);
+}
+.cell::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 55px;
+  height: 50px;
+  background: url("../../../Images/x.svg");
+  opacity: 0;
+  transition: opacity 0.15s ease, visibility 0.15s ease, transform 0.15s ease;
+  transform: translate(-50%, -50%) scale(1);
+  visibility: hidden;
+}
+
+.disabled {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 120px;
+  background-color: #34485d;
+}
+.disabled::after {
+  content: none;
+}
+
+/*# sourceMappingURL=Cell.module.css.map */

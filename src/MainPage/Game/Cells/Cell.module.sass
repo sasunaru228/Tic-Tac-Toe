@@ -1,0 +1,37 @@
+.cell
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  width: 120px
+  height: 120px
+  background-color: #34485d
+  transition: background-color .15s
+  position: relative
+  &:hover
+    &::after
+      opacity: .4
+      visibility: visible
+      transform: translate(-50%, -50%) scale(.7)
+  &::after
+    content: ''
+    position: absolute
+    top: 50%
+    left: 50%
+    width: 55px
+    height: 50px
+    background: url("../../../Images/x.svg")
+    opacity: 0
+    transition: opacity .15s ease, visibility .15s ease, transform .15s ease
+    transform: translate(-50%, -50%) scale(1)
+    visibility: hidden
+.disabled
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  width: 120px
+  height: 120px
+  background-color: #34485d
+  &::after
+    content: none
