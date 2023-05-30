@@ -33,7 +33,7 @@ function Authorization () {
           disabled={submitting}
           type="submit"
           onSubmit={() => enterLogin()}
-          to={login.trim() !== '' ? '/main' : '/'}>ENTER
+          to={login.trim() !== '' ? '/main' : '/zazazoo'}>ENTER
         </button>
       </form>
     </div>
