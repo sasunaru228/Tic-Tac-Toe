@@ -13,6 +13,7 @@ function Game () {
     turnCounter: 0
   })
   const [gameLayout, setGameLayout] = useState(['', '', '', '', '', '', '', '', ''])
+  const [winVariant, setWinVariant] = useState('win')
   const winOptions = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]
 
   function checkWin () {
@@ -26,6 +27,8 @@ function Game () {
             whoIsWin: 1
           }
         })
+        console.log(a.toString() + b.toString() + c.toString())
+        setWinVariant('win' + a + b + c)
         return true
       }
       if (gameLayout[a] === 'O' && gameLayout[a] === gameLayout[b] && gameLayout[b] === gameLayout[c]) {
@@ -34,6 +37,8 @@ function Game () {
           gameOver: true,
           whoIsWin: 2
         }))
+        console.log(a.toString() + b.toString() + c.toString())
+        setWinVariant('win' + a + b + c)
         return true
       }
     }
@@ -83,18 +88,19 @@ function Game () {
       turnCounter: 0
     })
     setGameLayout(['', '', '', '', '', '', '', '', ''])
+    setWinVariant(null)
   }
 
   useEffect(() => {
     if (checkWin()) return
-    if (gameStatus.whoIsTurn) setTimeout(botTurn, 700)
+    if (gameStatus.whoIsTurn) setTimeout(botTurn, 1000)
   }, [gameLayout, gameStatus.whoIsTurn])
 
   return (
     <div className={classes.substrate}>
       <div className={classes.gameBackground}>
         {gameStatus.gameOver ? <Result whoIsWin={gameStatus.whoIsWin}/> : <Turn whoIsTurn={gameStatus.whoIsTurn}/>}
-        <div className={classes.layout}>
+        <div className={classes.layout + ' ' + classes[winVariant]}>
           {gameLayout.map((layout, index) => (
             <Cell
               layout={layout}
@@ -108,7 +114,7 @@ function Game () {
           className={!gameStatus.gameOver ? classes.restart : classes.restartActive}
           onClick={setNewGame}
         >
-            RESTART
+            Начать заново
         </span>
       </div>
     </div>

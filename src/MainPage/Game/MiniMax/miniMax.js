@@ -18,10 +18,10 @@ const emptyCells = (layout) => {
 const checkWin = (layout) => {
   for (let i = 0; i < winOptions.length; i += 1) {
     const [a, b, c] = winOptions[i]
-    if (layout[a] === 'X' && layout[a] === layout[b] && layout[b] === layout[c]) {
+    if (layout[a] === 'X' && layout[b] === 'X' && layout[c] === 'X') {
       return -1
     }
-    if (layout[a] === 'O' && layout[a] === layout[b] && layout[b] === layout[c]) {
+    if (layout[a] === 'O' && layout[b] === 'O' && layout[c] === 'O') {
       return 1
     }
   }
